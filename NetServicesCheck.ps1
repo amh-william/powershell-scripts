@@ -4,7 +4,7 @@ $netstat = Invoke-Command -ScriptBlock { netstat -ano }
 $netstat[4..$netstat.Length].ForEach({
         $tmp = ($_.trim().split(" ", [System.StringSplitOptions]::RemoveEmptyEntries));
         if ($tmp[4] -eq "Listening" -or -not $tmp[1].contains("[")) {
-            if ($tmp[2].Split(':')[0] -Match '(^148\.85\.)|(^192\.168\.)|(^10\.)|(^172\.1[6-9]\.)|(^172\.2[0-9]\.)|(^172\.3[0-1]\.)|(0\.0\.0\.0)|(\*)') {
+            if ($tmp[2].Split(':')[0] -Match '(^192\.168\.)|(^10\.)|(^172\.1[6-9]\.)|(^172\.2[0-9]\.)|(^172\.3[0-1]\.)|(0\.0\.0\.0)|(\*)') {
                 if ($tmp.Length -eq 5) {
                     $results += [PSCustomObject]@{
                         Proto          = $tmp[0];
